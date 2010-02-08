@@ -1,16 +1,7 @@
 #!/usr/bin/env python
-# -*- coding: ISO-8859-1 -*-
-# Copyright by Mao Xizeng (maoxz@mail.cbi.pku.edu.cn)
-# Created: 2005-01-08 09:57:34
-# $Id: TestDiscover.py 504 2008-05-30 00:49:59Z lymxz $
+"""unittest for discovery.py"""
 
-__version__ = '$LastChangedRevision: 504 $'.split()[-2]
-
-"""unittest for discovery.py
-"""
-
-import os, unittest
-from sets import Set
+import os,sys, unittest
 
 from Cheetah.Template import Template
 
@@ -51,7 +42,7 @@ class TestDist(unittest.TestCase):
     def testAdd(self):
         dist = discover.Dist()
         dist.add('1', 1)
-        testres = Set()
+        testres = set()
         testres.add(1)
         self.failUnlessEqual(dist['1'], testres)
         dist.add('1', 1)

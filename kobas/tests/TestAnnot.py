@@ -1,13 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: ISO-8859-1 -*-
-# Copyright by Mao Xizeng (maoxz@mail.cbi.pku.edu.cn)
-# Created: 2004-12-29 11:06:12
-# $Id: TestAnnot.py 465 2008-03-04 18:15:07Z lymxz $
-
-__version__ = '$LastChangedRevision: 465 $'.split()[-2]
-
-"""unittest for annot
-"""
+"""unittest for annot"""
 
 import unittest
 from kobas import annot
@@ -64,8 +56,6 @@ class TestAnnotation(unittest.TestCase):
     def testIsValidTrueAnnot(self):
         true_annot_single_ko = annot.Annotation('hsa:124', [['K00001',],])
         self.assert_(true_annot_single_ko.is_valid())
-        true_annot_multi_kos = annot.Annotation('hsa:10020', [['K01791',], ['K00885',]])
-        self.assert_(true_annot_multi_kos.is_valid())
 
     def testTestKos(self):
         myannot = annot.Annotation('hsa:10020', [['K01791',], ['K00885',]])

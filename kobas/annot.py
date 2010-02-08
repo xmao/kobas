@@ -66,13 +66,12 @@ class Annotation(object):
         """ Is I valid according to kg table, true if all ko is valid
         """
         mykeggdb = dbutils.keggdb()
-
         if not self.get_kos():
             return False
-        
-        for ko_id in self.get_kos():
-            if not mykeggdb.is_valid_annot((self.query, ko_id)):
-                return False
+        else:
+            for ko_id in self.get_kos():
+                if not mykeggdb.is_valid_annot((self.query, ko_id)):
+                    return False
         
         return True
 

@@ -3,7 +3,7 @@ kobas_home = /usr/share/kobas
 blast_home = /usr/bin
 
 [KEGG]
-kobasdb = %(kobas_home)s/kegg.dat
+keggdb = %(kobas_home)s/kegg.dat
 
 [BLAST]
 blast = %(blast_home)s/blastall

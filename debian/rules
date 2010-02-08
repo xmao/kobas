@@ -1,0 +1,96 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+CFLAGS = -Wall -g
+
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -O0
+else
+	CFLAGS += -O2
+endif
+
+build: build-stamp build-doc-stamp
+
+build-stamp: 
+	dh_testdir
+	python setup.py build
+	touch build-stamp
+
+build-doc-pdf-stamp:
+	dh_testdir
+	$(MAKE) -C doc pdf \
+		MKHOWTO='TEXINPUTS=$$(TEXINPUTS) $$(PYTHON) $$(PWD)/tools/mkhowto'
+	touch doc-pdf-stamp
+
+build-doc-info-stamp:
+	dh_testdir
+	$(MAKE) -C doc/info VERSION=$(VER)
+	touch doc-info-stamp
+
+build-doc-stamp: build-doc-pdf-stamp build-doc-info-stamp
+	touch doc-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+	-find . -name '*.py[co]' | xargs rm -f
+	dh_clean 
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k 
+	dh_installdirs etc/
+		usr/share/info \
+		usr/share/man/man1 \
+		usr/share/doc/kobas/html \
+		usr/share/doc/kobas/pdf \
+		usr/share/doc/kobas/ps
+	python setup.py install --no-compile --prefix $(CURDIR)/debian/kobas/usr
+	for f in debian/kobas/usr/bin/*.py debian/kobas/usr/bin/*.sh; do \
+		mv $$f $${f%%.*}; \
+	done
+	cp -p doc/paper-letter/*.pdf $(CURDIR)/debian/kobas/usr/share/doc/kobas/pdf
+	cp -p doc/paper-letter/*.ps $(CURDIR)/debian/kobas/usr/share/doc/kobas/ps
+	cp -p doc/paper-letter/*.div $(CURDIR)/debian/kobas/usr/share/doc/kobas/dvi
+	cp -p doc/info/*info* $(CURDIR)/debian/kobas/usr/share/info
+	dh_installinfo --noscripts doc/info/*info*
+	cp -p doc/man/*.1 $(CURDIR)/debian/kobas/usr/share/man/man1
+	dh_installchangelogs
+
+# Build architecture-independent files here.
+binary-indep: build install
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs 
+	dh_installdocs
+	dh_installexamples
+	dh_installman
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+#	dh_perl
+	dh_python
+#	dh_makeshlibs
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure

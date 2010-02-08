@@ -1,0 +1,17 @@
+Source: kobas
+Section: science
+Priority: optional
+Maintainer: Mao Xizeng <maoxz@mail.cbi.pku.edu.cn>
+Build-Depends: debhelper (>= 4.0.0)
+Standards-Version: 3.6.1
+
+Package: kobas
+Architecture: any
+Suggests: graphviz
+Depends: ${shlibs:Depends}, ${misc:Depends}, python (>= 2.3.4), python-biopython (>= 1.2.4), blast2, sqlite, python-sqlite, python-cheetah, r-base-core (>= 2.0.0), python-rpy, r-bioconductor-genets
+Description: KEGG Orthology Based Annotation System
+ KEGG Orthology Based Annotation System (KOBAS) is a standalone Python
+ application in Bioinformatics. KOBAS can assign appropriate KO terms for
+ queried sequences based on similarity search, and it can further discover
+ enriched KO terms among the annotation results by frequency of pathways or
+ statistical significance of pathways.

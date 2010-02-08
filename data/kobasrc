@@ -1,0 +1,14 @@
+[DEFAULT]
+kobas_home = /usr/share/kobas
+blast_home = /usr/bin
+
+[KEGG]
+kobasdb = %(kobas_home)s/kegg.dat
+
+[BLAST]
+blast = %(blast_home)s/blastall
+blastdb = %(kobas_home)s/keggseq.fasta
+
+[PARAMETER]
+evalue = 1.0e-5
+rank = 5

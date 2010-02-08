@@ -1,0 +1,58 @@
+#compiler-settings
+useAutocalling=no
+#end compiler-settings
+
+<h2>Summary</h2>
+<table class="kobasSummary">
+  <tr>
+  #for $field in $title[0:5]
+  <td>$field</td>
+  #end for
+  </tr>
+  
+  #for $row in $result
+  #set $pathway = $row[0]
+  #set $pathwayID = $row[5]
+  <tr>
+    <!-- If pathway_id exist, print the link to kegg -->
+    #if $pathwayID != "" and $pathwayID != "ko00000"
+    <td><a href="#$row[0]">$row[0]</a>
+    #else
+    <td>$row[0]</td>
+    #end if
+    
+    #for $field in $row[1:5]
+    <td>$field</td>
+    #end for
+  </tr>
+  #end for
+</table>
+
+<hr/>
+
+<h2>Detail</h2>
+<table class="kobasOutput">
+  #set $klass = "row1"
+  #for $row in $result
+  #if $klass  == "row2" 
+  #set $klass = "row1"
+  #else
+  #set $klass = "row2"
+  #end if
+  #set $pathway = $row[0]
+  #set $pathwayID = $row[5]
+  #set $geneIDs = $row[6]
+  #set $koIDs = $row[7]
+  <tr class="$klass">
+    <td id="$pathway">
+	#if $pathwayID != ""
+    	<a target="_blank" href="http://www.genome.jp/dbget-bin/show_pathway?$pathwayID+$koIDs">$pathway</a>
+	#else
+	$pathway
+	#end if
+    </td>
+    <td>$geneIDs</td>
+  </tr>
+  #end for
+</table>
+

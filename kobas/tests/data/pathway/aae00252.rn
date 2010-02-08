@@ -1,0 +1,13 @@
+R00357	L-Aspartic acid:oxygen oxidoreductase (deaminating); L-Aspartate + H2O + Oxygen <=> Oxaloacetate + NH3 + H2O2
+R01397	Carbamoyl-phosphate:L-aspartate carbamoyltransferase; Carbamoyl phosphate + L-Aspartate <=> Orthophosphate + N-Carbamoyl-L-aspartate
+R00355	L-Aspartate:2-oxoglutarate aminotransferase; L-Aspartate + 2-Oxoglutarate <=> Oxaloacetate + L-Glutamate
+R00489	L-Aspartate 1-carboxy-lyase; L-Aspartate <=> beta-Alanine + CO2
+R01086	N-(L-Argininosuccinate) arginie-lyase; N-(L-Arginino)succinate <=> Fumarate + L-Arginine
+R01083	N6-(1,2-Dicarboxyethyl)AMP AMP-lyase; N6-(1,2-Dicarboxyethyl)-AMP <=> Fumarate + AMP
+R00401	L-Alanine racemase; L-Alanine <=> D-Alanine
+R05577	L-Aspartate:tRNA(Asp) ligase (AMP-forming); tRNA(Asp) + L-Aspartate + ATP <=> L-Aspartyl-tRNA(Asp) + Pyrophosphate + AMP
+R03647	L-Aspartate:tRNAAsp ligase (AMP-forming); ATP + L-Aspartate + tRNA(Asn) <=> AMP + Pyrophosphate + L-Aspartyl-tRNA(Asn)
+R03038	L-Alanine:tRNA(Ala) ligase (AMP-forming); ATP + L-Alanine + tRNA(Ala) <=> AMP + Pyrophosphate + L-Alanyl-tRNA
+R01135	IMP:L-aspartate ligase (GDP-forming); GTP + IMP + L-Aspartate <=> GDP + Orthophosphate + N6-(1,2-Dicarboxyethyl)-AMP
+R01954	L-Citrulline:L-aspartate ligase (AMP-forming); ATP + L-Citrulline + L-Aspartate <=> AMP + Pyrophosphate + N-(L-Arginino)succinate
+R00344	Pyruvate:carbon-dioxide ligase (ADP-forming); ATP + Pyruvate + HCO3- <=> ADP + Orthophosphate + Oxaloacetate

@@ -1,0 +1,70 @@
+		 
+		 KOBAS - KEGG Orthology Based Annotation System
+
+1. What's KOBAS?
+
+KEGG Orthology Based Annotation System (KOBAS) is a standalone Python
+application in Bioinformatics.  KOBAS can assign appropriate KO terms for
+queried sequences based on similarity search, and it can further discover
+enriched KO terms among the annotation results by frequency of pathways or
+statistical significance of pathways.
+
+2. Installation
+
+Please refer to install.txt under docs directory in KOBAS source
+
+3. Usage
+
+KOBAS composes of two major scripts, which are similar to usual command line
+tools: the behavor can be adjusted by swiches and configuration file.  The whole
+work flow can be divided to two steps: sequence annotation and pathway discovery.
+
+Sequence Annotation
+-----------------
+
+Given a FASTA file of protein, you can annotate them by this command:
+
+      blast2ko.py <FASTA FILE> 
+
+All the result are printed default, you can redirect into a file.  If the input
+are nuclear acid sequences, you can adjust blast2ko behavor by the command
+option "-p" as follows:
+
+      blast2ko.py -p blastx <FASTA FILE>
+
+
+Pathway Discovery
+-----------------
+
+Once the annotation is complete, pathfind can be used to discover enriched
+pathways by two ways: frequency prior and statistally significance prior.
+You can find the most frequent pathways among the annotation result:
+
+      pathfind.py <ANNOATION FILE>
+
+Or, you can also find the most statistically enriched pathways:
+
+      pathfind.py [-k b/c/h] <ANNOATION FILE> <BACKGROUND ORGANISM>
+
+'-k' option specifies the statistical method to rank, 'b' represents binomial
+distribution, 'c' represents chisquare distribution and 'h' represents
+hypergeometry distrubtion. <BACKGROUND Organism> is three-charater abbreviation
+of the organism in KEGG GENES as backgroud distribution.  Also, you can specifiy
+an data file as backround like this:
+
+      pathfind.py [-k b/c/h] <ANNOATION FILE> <BACKGROUND FILE>
+
+Please refer other details to online manpage by the command "<CMD> -h".
+
+4. Contact
+
+Please, report bugs, comments and suggestions to the email below.  Also, if you
+succeed in compiling this module under a platform other than Linux, please, send
+us a note.
+
+Author: Xizeng Mao, Tao Cai, Liping Wei
+Email:  kobas@mail.cbi.pku.edu.cn
+
+Web: 	http://kobas.cbi.pku.edu.cn/download
+
+Enjoy :)

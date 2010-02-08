@@ -1,0 +1,29 @@
+#compiler-settings
+useAutocalling=no
+#end compiler-settings
+
+<h2>Output of Test Result</h2>
+<table>
+  <tr>
+  #for $field in $thead[0:6]
+  <td>$field</td>
+  #end for
+  </tr>
+  
+  #for $row in $result
+  #set $pathway = $row[0]
+  #set $pathwayID = $row[6]
+  <tr>
+    <!-- If pathway_id exist, print the link to kegg -->
+    #if $pathwayID != "" and $pathwayID != "ko00000"
+    <td><a target="_blank" href="http://www.genome.jp/dbget-bin/show_pathway?$pathwayID">$pathway</a>
+    #else
+    <td>$pathway</td>
+    #end if
+    
+    #for $field in $row[1:6]
+    <td>$field</td>
+    #end for
+  </tr>
+  #end for
+</table>

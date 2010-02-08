@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4.1: http://docutils.sourceforge.net/" />
+<title>KOBAS Tutorial</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-12-18 01:56:14 +0100 (Sun, 18 Dec 2005) $
+:Revision: $Revision: 4224 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em ;
+  background-color: #eeeeee }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+  background-color: #eeeeee }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="kobas-tutorial">
+<h1 class="title">KOBAS Tutorial</h1>
+<p>KEGG-Orthology Based annotation System (KOBAS), is a suite of Python scripts,
+which can automatically annotate a set of sequences with KO terms and identify
+both the most frequent and the statistically significantly enriched pathways.</p>
+<p>This tutorial doesn't attempt to be comprehensive and cover all the details,
+even algorithmic details. Instead, it gives you a whole view of KOBAS system and
+then focuses on how to use KOBAS efficiently in practical analysis.  If you are
+interested in the involved algorithm, please refer to KOBAS paper.</p>
+<div class="section">
+<h1><a id="an-overview-of-kobas" name="an-overview-of-kobas">An overview of KOBAS</a></h1>
+<div class="section">
+<h2><a id="what-s-kobas" name="what-s-kobas">What's KOBAS</a></h2>
+<p>KOBAS, KEGG Ortholgy Based Annotation System, a suite of layered Python scripts,
+which can automatically annotate a set of sequences with KO terms and identify
+both the most frequent and the statistically significantly enriched pathways.</p>
+<p>Features:</p>
+<ul class="simple">
+<li>Anntate DNA or protein sequences with KO terms over Blasting or ID mapping
+method</li>
+<li>Identify the most frequent pathways and enriched pathways over multiple
+statistical methods</li>
+<li>Support simple tabular-like flat text output and HTML output</li>
+<li>Provide almost complete parsers for all KEGG resource</li>
+<li>Provide flexible configuration methods</li>
+<li>Layed infrastructure for reuse and easy automation</li>
+<li>SQLite support, zero database configuration</li>
+</ul>
+</div>
+<div class="section">
+<h2><a id="design-philosophy" name="design-philosophy">Design philosophy</a></h2>
+<p>Some philosophies are followed when designing KOBAS:</p>
+<div class="section">
+<h3><a id="loopse-coupling" name="loopse-coupling">Loopse coupling</a></h3>
+<p>KOBAS is designed as a multi-layered application: python modules, python scripts
+and shell scripts.  Python modules in <tt class="docutils literal"><span class="pre">src/kobas/</span></tt> directory can enable
+maximal reuse of core codes, which provides almost complete parsers for all
+suites of KEGG resources and core codes about sequences annotation and pathway
+mining.  Upon these core modules, several functional python scripts are created
+in <tt class="docutils literal"><span class="pre">scripts</span></tt> directory, which serve as actual annotation, pathway mining and
+usual operations on the fasta file and annotation file.  Each script can be
+adjusted by KOBAS configuration file or commoand line options. Further, to
+facilitate job automation, some shell scritpt demos are also found for the
+wrappers for python scripts in <tt class="docutils literal"><span class="pre">scripts</span></tt> directory.</p>
+</div>
+<div class="section">
+<h3><a id="assure-right-by-unit-test" name="assure-right-by-unit-test">Assure right by unit test</a></h3>
+<p>Quality control is critical, and KOBAS assure this by popular unit test.  In KOBAS,
+each core python module has one corresponding unit test module in
+<tt class="docutils literal"><span class="pre">src/kobas/tests</span></tt> directory, so any broken is easy to detect.</p>
+</div>
+<div class="section">
+<h3><a id="flexible-configurations" name="flexible-configurations">Flexible configurations</a></h3>
+<p>The behaviors of actual scripts is adjusted flexibly on different levels for
+kinds of sakes.  KOBAS configuration files are for relatively persistent settings:
+<tt class="docutils literal"><span class="pre">/etc/kobasrc}</span> <span class="pre">for</span> <span class="pre">global</span> <span class="pre">settings,</span> <span class="pre">while</span> <span class="pre">\file{.kobasrc</span></tt> in HOME directory for
+persional setting, which will overide global settings. Command options are
+available for each script for transient behavior adjustment, which have priority
+over all configuration files.</p>
+</div>
+</div>
+<div class="section">
+<h2><a id="kobas-s-architecture" name="kobas-s-architecture">KOBAS's architecture</a></h2>
+<img alt="kobas.png" src="kobas.png" />
+</div>
+</div>
+<div class="section">
+<h1><a id="install-kobas" name="install-kobas">Install KOBAS</a></h1>
+<p>Please refer to install.txt.</p>
+</div>
+<div class="section">
+<h1><a id="get-started-with-kobas" name="get-started-with-kobas">Get started with KOBAS</a></h1>
+<p>The basic workflow to use KOBAS involves two steps: annotate sequences with KO,
+and then identify enriched pathways.  Each step is implemented as one separate
+script: <tt class="docutils literal"><span class="pre">blast2ko.py</span></tt> and <tt class="docutils literal"><span class="pre">pathfind.py.py</span></tt>.  This chapter will demonstrate how
+to use them in detail.</p>
+<div class="section">
+<h2><a id="annotating-with-blast2ko-py" name="annotating-with-blast2ko-py">Annotating with blast2ko.py</a></h2>
+<p><tt class="docutils literal"><span class="pre">blast2ko.py</span></tt> serves to annotate a set of DNA or protein sequences with KO
+terms, which plays the most important role in KOBAS.  The typical usage is:</p>
+<pre class="literal-block">
+blast2ko.py FILE
+</pre>
+<p>In this case, <tt class="docutils literal"><span class="pre">FILE</span></tt> is a flat file consist of FASTA protein sequences:</p>
+<pre class="literal-block">
+&gt;YAL068C_s.cerevisiae
+MVKLTSIAAGVAAIAATASATTTLAQSDERVNLVELGVYVSDIRAHLAQYYMFQAAHPTE
+TYPVEVAEAVFNYGDFTTMLTGIAPDQVTRMITGVPWYSSRLKPAISSALSKDGIYTIAN
+&gt;YAL067W-A_s.cerevisiae
+MPIIGVPRCLIKPFSVPVTFPFSVKKNIRILDLDPRTEAYCLSLNSVCFKRLPRRKYFHL
+LNSYNIKRVLGVVYC
+&gt;YAL067C_s.cerevisiae
+MYSIVKEIIVDPYKRLKWGFIPVKRQVEDLPDDLNSTEIVTISNSIQSHETAENFITTTS
+EKDQLHFETSSYSEHKDNVNVTRSYEYRDEADRPWWRFFDEQEYRINEKERSHNKWYSWF
+KQGTSFKEKKLLIKLDVLLAFYSCIAYWVKYLDTVNINNAYVSGMKEDLGFQGNDLVHTQ
+VMYTVGNIIFQLPFLIYLNKLPLNYVLPSLDLCWSLLTVGAAYVNSVPHLKAIRFFIGAF
+EAPSYLAYQYLFGSFYKHDEMVRRSAFYYLGQYIGILSAGGIQSAVYSSLNGVNGLEGWR
+WNFIIDAIVSVVVGLIGFYSLPGDPYNCYSIFLTDDEIRLARKRLKENQTGKSDFETKVF
+DIKLWKTIFSDWKIYILTLWNIFCWNDSNVSSGAYLLWLKSLKRYSIPKLNQLSMITPGL
+GMVYLMLTGIIADKLHSRWFAIIFTQVFNIIGNSILAAWDVAEGAKWFAFMLQCFGWAMA
+PVLYSWQNDICRRDAQTRAITLVTMNIMAQSSTAWISVLVWKTEEAPRYLKGFTFTACSA
+FCLSIWTFVVLYFYKRDERNNAKKNGIVLYNSKHGVEKPTSKDVETLSVSDEK
+...
+</pre>
+<p>If the sequences are DNA sequences, you just need tell <tt class="docutils literal"><span class="pre">blast2ko.py</span></tt> with the
+option <tt class="docutils literal"><span class="pre">-p</span> <span class="pre">blastx</span></tt>, so blast2ko.py will invoke <tt class="docutils literal"><span class="pre">blastx</span></tt> to dynamically
+translate DNA sequence into protein before annotating:</p>
+<pre class="literal-block">
+blast2ko.py -p blastx FILE
+</pre>
+<p>Once the sequences are submitted to <tt class="docutils literal"><span class="pre">blast2ko.py</span></tt>, <tt class="docutils literal"><span class="pre">blast2ko.py</span></tt> will generally
+run into annotating for a long while and then prints the final annotation result
+to the stand console.  Users can easily save the result into another file by
+output redirection or pass it to other filter over Unix pipe to process further.</p>
+<p>The final annotation result is flat tab-separated text, which is very simple as
+follows:</p>
+<pre class="literal-block">
+# Now is preparing for BLAST, please wait ...
+# Done!
+# Now is blasting and annotating, please wait...
+# Condition:    evalue=1e-5 rank=5
+# Summary:      1965 succeed, 3890 fail
+
+# query ko_id:rank:evalue:score:identity
+YAL068C_s.cerevisiae
+YAL067W-A_s.cerevisiae
+YAL067C_s.cerevisiae    K02511:58:5e-11:70.5:0.209486166008
+...
+</pre>
+<p>The first lines prefixed with <cite>#</cite> are comments, such as, run-time parameters, a
+result summary and meta information of annotation entry.  Then, followed by
+sequence annotations.  Each entry occupies one line, and the first column is
+sequence ID, and the following things separated with TAB are KO annotations if
+it succeeds, or blank.  If one sequence are annotated with multiple KO terms,
+and all KO annotations are listed one by one separated with SPACE.  Each KO
+annotation entry consists of five fields separated with colon, which are KO ID,
+rank, evalue, score, identity.</p>
+<p>By the way, you can easily refer to on-line help with the command:</p>
+<pre class="literal-block">
+blast2ko.py
+</pre>
+</div>
+<div class="section">
+<h2><a id="mining-with-pathfind-py" name="mining-with-pathfind-py">Mining with pathfind.py</a></h2>
+<p>Once we get KO annotations for queried sequences, we can identify the most
+frequent pathways or statistically enriched pathways with <tt class="docutils literal"><span class="pre">pathfind.py</span></tt>.  Assume
+that the annotation result file is <tt class="docutils literal"><span class="pre">annot.txt</span></tt>, and its typical usage is
+straightforward.  Just with only <tt class="docutils literal"><span class="pre">annot.txt</span></tt> followed:</p>
+<pre class="literal-block">
+pathfind.py annot.txt
+</pre>
+<p>you can get the most frequent pathways represented as flat tabular text:</p>
+<pre class="literal-block">
+#Pathway        Count
+Ribosome        169
+Purine metabolism       104
+Glycolysis / Gluconeogenesis    61
+Cell cycle      60
+Oxidative phosphorylation       57
+Translation factors     54
+Starch and sucrose metabolism   52
+Glycine, serine and threoninemetabolism 46
+Pyrimidine metabolism   45
+Pyruvate metabolism     42
+...
+</pre>
+<p>Similarly, the first line is the comment line, which indicates the content in
+the file, and then the identified pathways are listed row by row in descending
+order.  Each pathway contains two fields, its name and gene number it contains,
+which are separated with TAB.  Notably, the pathway name here just corresponds
+to the third level of KO hierarchy.</p>
+<p>Further, <tt class="docutils literal"><span class="pre">pathfind.py</span></tt> can accept two annotation files and identify statistically
+enriched pathways.  Three statistical methods are available currently:
+hypergeometric test, bionomal test, chi square method, which specified
+respectively by the option of <tt class="docutils literal"><span class="pre">-k</span> <span class="pre">h/b/c</span></tt>.  For hypergeometric test, the first
+file must be a subset of the second file, while there is no limit for the last
+two statistical methods. The typical usage with hypergeometric test is:</p>
+<pre class="literal-block">
+pathfind.py -k h FILE1 FILE2
+</pre>
+<p>The output of enriched pathways is also flat tabluar text:</p>
+<pre class="literal-block">
+#Pathway        Sample Count    Backgroud Count Pvalue  Qvalue
+Phenylalanine, tyrosine andtryptophan biosynthesis      27      30      0.00362190718822        0.00920823861413
+Reductive carboxylate cycle (CO2fixation)       15      16      0.0147135042733 0.0367837606832
+Tyrosine metabolism     22      26      0.0387091655459 0.095186472654
+High-mannose typeN-glycan biosynthesis  15      17      0.0471418488409 0.114052860099
+Selenoamino acidmetabolism      20      24      0.0638232139694 0.15196003326
+...
+</pre>
+<p>The first line is also the comment line, and the following lines are enriched
+pathways sorted by <tt class="docutils literal"><span class="pre">Pvalue</span></tt>.  Each pathway occupies one line, and it includes
+five fields, the pathway name, the number of genes mapped to this pathway in the
+first data set, the number of genes in the second data set, Pvalue cacluated by
+the specified statistical method and Qvalue (False Discovery Rate) value.</p>
+<p>By the way, kobas has precomputed the gene distributions for all the genomes
+available in the KEGG GENES database.  In KOBAS they are represented as
+three-letter abbreviation, and please refer to related web page
+(<a class="reference" href="http://www.genome.jp/kegg/catalog/org_list.html">http://www.genome.jp/kegg/catalog/org_list.html</a>) for the detail. To access such
+precomputed genomes in <tt class="docutils literal"><span class="pre">pathfind.py</span></tt>, you need just specify three-letter
+abbreviation as like a file name.  For example, assume that we want to compare
+<tt class="docutils literal"><span class="pre">Synechocystis</span> <span class="pre">sp.</span> <span class="pre">PCC6803</span></tt> and <tt class="docutils literal"><span class="pre">Saccharomyces</span> <span class="pre">cerevisiae</span></tt>, which are
+abbreviated as <tt class="docutils literal"><span class="pre">syn</span></tt> and <tt class="docutils literal"><span class="pre">sce</span></tt>, we can identify the enriched pathways over
+chi square test by the following command:</p>
+<pre class="literal-block">
+pathfind.py -k c syn sce
+</pre>
+</div>
+</div>
+<div class="section">
+<h1><a id="use-kobas-more-efficiently" name="use-kobas-more-efficiently">Use KOBAS more efficiently</a></h1>
+<p>The core scripts described in the last chapter only provides pretty basic
+functions, and it's not by far enough in practical cases.  So it's critical to
+tune and extend KOBAS, and this chapter will focus on how to make good and
+efficient use of KOBAS.</p>
+<div class="section">
+<h2><a id="customizing-kobas" name="customizing-kobas">Customizing KOBAS</a></h2>
+<p>KOBAS depends many environment variables, which are initially defined with
+configuration file, and its format is very simple, which can be parsed by python
+standard module, ConfigParser.  Global setting file, <tt class="docutils literal"><span class="pre">/etc/kobasrc</span></tt>, is as
+follows:</p>
+<pre class="literal-block">
+[DEFAULT]
+kobas_home = /usr/share/kobas
+blast_home = /usr/bin
+
+[KEGG]
+kobasdb = %(kobas_home)s/kegg.dat
+
+[BLAST]
+blast = %(blast_home)s/blastall
+blastdb = %(kobas_home)s/keggseq.fasta
+
+[PARAMETER]
+evalue = 1.0e-5
+rank = 5
+</pre>
+<p>The configuration file consists of sections, led by a <cite>[section]</cite> header and
+followed by <cite>name = value</cite> entries.  Note that leading whitespace is removed
+from values.  The optional values can contain format strings which refer to
+other values in the same section, or values in a special <cite>DEFAULT</cite> section.
+Lines beginning with <cite>#</cite> are ignored and may be used to provide comments.</p>
+<p><tt class="docutils literal"><span class="pre">/etc/kobasrc</span></tt> defines three sections, which totally contains meta variables
+(kobas_home and blast_home) six variables (kobasdb, keggdict, blast, blastdb, evalue
+and rank).  As the name indicates, respective meanings are straightforward:</p>
+<dl class="docutils">
+<dt>kobas_home</dt>
+<dd>Top directory which contains KOBAS backend data</dd>
+<dt>blast_home</dt>
+<dd>Top directory which contains blastall binary program, which is
+generally <tt class="docutils literal"><span class="pre">/usr/bin</span></tt>, that is its absolute path is
+<tt class="docutils literal"><span class="pre">/usr/bin/blastall</span></tt>.</dd>
+<dt>kobasdb</dt>
+<dd>The path of KOBAS backend SQLite 3 database file, which is relative
+to <tt class="docutils literal"><span class="pre">kobas_home</span></tt>.</dd>
+<dt>blast</dt>
+<dd>The path of blastall, which is relative to <tt class="docutils literal"><span class="pre">blast_home</span></tt>.</dd>
+<dt>blastdb</dt>
+<dd>The path of backend sequence database used by blastall, which is
+relative to <tt class="docutils literal"><span class="pre">kobas_home</span></tt>.</dd>
+<dt>evalue</dt>
+<dd>Default evalue cutoff, which is represented with scientific
+counting method.</dd>
+<dt>rank</dt>
+<dd>Default rank cutoff.</dd>
+</dl>
+<p>When you undertand this configuration file, you can even run KOBAS without
+installation, just with simple settingsg.  The secret is that KOBAS scripts
+depends upon python module, backend data and KOBAS configuration file, so it
+involes only three steps to make KOBAS work.  Assume KOBAS distribution tarball
+is in your HOME directory, type the following commands with the root account:</p>
+<pre class="literal-block">
+tar zxf kobas-1.1.0.tar.gz &amp;&amp; cd kobas-1.1.0
+ln -snf `pwd`/src/kobas/ /usr/lib/python$(python -c 'import sys; print sys.version[:3]')/site-packages/
+sed -e &quot;/^kobas_home/ckobas_home = `pwd`&quot; data/kobasrc &gt; /etc/kobasrc
+</pre>
+<p>The last step actually copies <tt class="docutils literal"><span class="pre">kobasrc}</span> <span class="pre">into</span> <span class="pre">\file{/etc/</span></tt> directory and
+updates <tt class="docutils literal"><span class="pre">kobas_home</span></tt> variable with the top directory of the kobas
+distribution. Now you can run any python scripts, e.g. <tt class="docutils literal"><span class="pre">blast2ko.py</span></tt>:</p>
+<pre class="literal-block">
+python `pwd`/scripts/blast2ko.py
+</pre>
+<p>or shell script:</p>
+<pre class="literal-block">
+sh `pwd`/shell/blast2ko.sh
+</pre>
+</div>
+<div class="section">
+<h2><a id="once-annotating-more-reuse" name="once-annotating-more-reuse">Once annotating, more reuse</a></h2>
+<p>It's pretty usual to extract some snippets of annotations as another sample from
+a large annotation file, which may meet stricter conditions or come from a
+smaller sequence set.  KOBAS provides one python script, <tt class="docutils literal"><span class="pre">annotkit.py</span></tt>, to aid
+users to manipulate annotation files.  <tt class="docutils literal"><span class="pre">annotkit.py</span></tt> accepts the following
+options:</p>
+<blockquote>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-e <var>EVALUE</var></span></kbd></td>
+<td>Evalue cutoff ($&lt;EVALUE$)</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-i <var>IDENTITY</var></span></kbd></td>
+<td>IDENTIFY cutoff ($&gt;=IDENTITY$)</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-o <var>FORMAT</var></span></kbd></td>
+<td>Output format, o indicates raw annotation format and t
+indicates detailed tab-seperated format, which related contains pathway
+information, gene function and all parameters.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-r <var>RANK</var></span></kbd></td>
+<td>Rank cutoff ($&lt;=RANK$)</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-s <var>FILE</var></span></kbd></td>
+<td>One-column file of sequence subset, one ID in each line.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-s <var>FILE</var></span></kbd></td>
+<td>Two-column file of Sequence ID map seperated with tab, default
+order is key, value.</td></tr>
+</tbody>
+</table>
+</blockquote>
+<p>A practical usage is to annotate all sequences only once under the most loose
+cutoffs of evalue and rank, and contruct all specific annotation set with
+<tt class="docutils literal"><span class="pre">annotkit.py</span></tt>.  The default cutoffs of evalue and rank can be set respectively
+as 1000 and 1000 in <tt class="docutils literal"><span class="pre">\$HOME/.kobasrc</span></tt>.</p>
+<p>Assume that the raw annotation file is <tt class="docutils literal"><span class="pre">annot_raw.txt</span></tt> and sample sequence
+ID file is <tt class="docutils literal"><span class="pre">set1_ids.txt</span></tt>, and regular sample annotation set and
+background set can be constucted under evalue $10^{-5}$ and rank $5$ as
+follows:</p>
+<pre class="literal-block">
+annotkit.py -e 1e-5 -r 5 -o o -s set1_ids.txt annot_raw.txt &gt; set1_annot.txt
+annotkit.py -e 1e-5 -r 5 -o o annot_raw.txt &gt; annot_all.txt
+</pre>
+<p>Further, you can get detailed annotation information for each sequences by this
+command:</p>
+<pre class="literal-block">
+annotkit.py -e 1e-5 -r 5 -o t -s set1_ids.txt annot_raw.txt &gt; set1_detailed.txt
+</pre>
+</div>
+<div class="section">
+<h2><a id="job-automation" name="job-automation">Job automation</a></h2>
+<p>Nobody likes repeated jobs, so do I. I usually want all analysis once, not by
+manually input commands many times.  This automation is easy to get by a simple
+shell script based on the method of once annotating (See ref{sec:reuse}):</p>
+<pre class="literal-block">
+for dataset_file in $*; do
+    dataset=${dataset_file%%_*}
+    annotkit.py -o o -s ${dataset_file} annot_all.txt &gt; &quot;${dataset}_annot.txt&quot;
+    annotkit.py -o t -s ${dataset_file} annot_all.txt &gt; &quot;${dataset}_detailed.txt&quot;
+    pathfind.py &quot;${dataset}_annot.txt&quot; &gt; &quot;${dataset}_freq.txt&quot;
+    pathfind.py -k h &quot;${dataset}_annot.txt&quot; annot_all.txt &gt; &quot;${dataset}_hyper.txt&quot;
+    pathfind.py -k b &quot;${dataset}_annot.txt&quot; annot_all.txt &gt; &quot;${dataset}_binom.txt&quot;
+    pathfind.py -k c &quot;${dataset}_annot.txt&quot; annot_all.txt &gt; &quot;${dataset}_chisq.txt&quot;
+done
+</pre>
+<p>This script depends upon some prerequisites:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">annot_all.txt</span></tt> is the global annotation file including all sequences
+under specified evalue and rank cutoff; if no, please generate it beforhand.</li>
+<li>All dataset file follow same naming convention, xxx_ids.txt, and xxx
+indicates dataset name.</li>
+<li>In this case, <tt class="docutils literal"><span class="pre">annot_all</span></tt> is considered as background annotation file.</li>
+</ul>
+<p>This simple script will automatically generate six analysis file for each
+dataset, and user can also easily refines it to support more complex automation.
+Use your prefered editor, paste the snippet and save it with the name as you
+like, maybe kobas_batch.sh.  Now assume that there are three files in current
+directory, <tt class="docutils literal"><span class="pre">annot_all.txt</span></tt>, <tt class="docutils literal"><span class="pre">set1_ids.txt</span></tt>, <tt class="docutils literal"><span class="pre">set2_ids.txt</span></tt>, you
+can get all the analysis results by the command, totaly 12 output files:</p>
+<pre class="literal-block">
+sh kobas_batch.sh *_ids.txt
+</pre>
+</div>
+<div class="section">
+<h2><a id="improving-kobas-s-performance" name="improving-kobas-s-performance">Improving KOBAS's performance</a></h2>
+<p>Annotating in KOBAS is pretty time-consuming, so it's very criticial to improve
+kobas's performance.  Currently, there is no automatic way to optimize KOBAS yet,
+but we can still tune it manually at least by two ways:</p>
+<pre class="literal-block">
+* Split the large sequence file into several small sequence files, and join
+  all the annotations together after annotating.
+* Once annotating, and reuse it as much as possible.
+</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

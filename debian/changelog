@@ -1,0 +1,24 @@
+kobas (1.0.2-1) unstable; urgency=low
+
+  * Splitted into two packages: kobas and kobas-data.
+  * Added a new kobasinit Python script to support new initialization process.
+  * Fixed Binomal test.
+  * Fixed some unnecessary scripts.
+
+ -- Mao Xizeng <maoxz@mail.cbi.pku.edu.cn>  Wed, 14 Jun 2006 20:48:17 +0800
+
+kobas (1.0.1-1) unstable; urgency=low
+
+  * Fixed some bugs when installing.
+  * Added kobas tutorial and install document.
+  * Updated gene modules according to KEGG GENES v36. 
+
+ -- Mao Xizeng <maoxz@mail.cbi.pku.edu.cn>  Sun, 20 Nov 2005 16:56:29 +0800
+
+kobas (1.0.0-1) unstable; urgency=low
+
+  * Initial release.
+  * This is my first Debian package.
+
+ -- Mao Xizeng <maoxz@mail.cbi.pku.edu.cn>  Sun, 28 Aug 2005 16:06:23 +0800
+

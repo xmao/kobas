@@ -1,0 +1,17 @@
+Mentor
+======
+"Liping Wei" <weilp@mail.cbi.pku.edu.cn>
+
+
+Core KOBAS Developers
+=====================
+
+"Xizeng Mao" <maoxz@mail.cbi.pku.edu.cn>
+
+"Tao Cai" <cait@mail.cbi.pku.edu.cn>
+
+"Jianmin Wu" <wujian@mail.cbi.pku.edu.cn>
+
+"Chen Xie" <xiec@mail.cbi.pku.edu.cn>
+
+"Qiyao Li" <qiyaoli@gmail.com>

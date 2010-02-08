@@ -1,0 +1,163 @@
+<html>
+<!---
+ENTRY       aae00680
+DEFINITION  Methane metabolism - Aquifex aeolicus
+--->
+<head>
+<title>
+Methane metabolism - Aquifex aeolicus
+</title>
+<link rel="stylesheet" href="/css/kegg.css" type="text/css">
+<script language="JavaScript">
+<!---
+var intid = -1;
+var ptr = 0;
+var linesize = 50;
+var initwait = 10;
+var interval = 200;
+var times = 15;
+
+function next_map(mode,dir) {
+    var pathway_url = "/dbget-bin/get_pathway";
+    var test, obj_incr, sel, len, nsel, cng, url; 
+
+    obj_incr = document.selmenu.org_name;
+    test = (document.selmenu.test) ? true : false;
+
+    sel = obj_incr.selectedIndex;
+    len = obj_incr.options.length;
+    nsel = sel + dir;
+    if (nsel >= len) { nsel = 0; }
+    if (nsel < 0) { nsel = len - 1; }
+    cng = obj_incr.options[nsel].value;
+
+    url = pathway_url + "?org_name=" + cng + "&mapno=" + document.selmenu.mapno.value;
+    if (test) { url += "&test=1"; }
+    location.href = url;
+}
+
+function note(mes) {
+    status = '';
+    stat = mes;
+    pmes = mes;
+    count = 0;
+    intid = setTimeout( 'pushstat()', initwait );
+}
+
+function clr() {
+    clearTimeout( intid );
+    ptr = 0;
+    pmes = "";
+    status = "";
+}
+
+function pushstat() {
+    var i, brkpos, mes;
+    var len = stat.length;
+
+    if (count > 0) {
+	status = pmes;
+	count--;
+	intid = setTimeout( 'pushstat()', interval );
+	return;
+    }
+    count = times;
+
+    brkpos = linesize - 1;
+    for( i = 0; i < linesize && ptr + i < len; i++ ) {
+	if (stat.charAt(ptr+i) == " ") brkpos = i;
+    }
+
+    if (ptr + i < len) {
+	mes = stat.substring( ptr, ptr + brkpos ) + " ...";
+	ptr += brkpos + 1;
+    }
+    else {
+	mes = stat.substring( ptr, len );
+	if (ptr > 0) mes += " //";
+	ptr = 0;
+    }
+    status = mes;
+    pmes = mes;
+
+    intid = setTimeout( 'pushstat()', interval );
+}
+
+function btn(bobj,img) {
+    bobj.src = "/Fig/bget/button_" + img + ".gif";
+}
+//--->
+</script>
+</head>
+
+<body>
+<form name="selmenu" method="GET" action="/dbget-bin/get_pathway">
+
+<table cellpadding="0" width="100%" cellspacing="0" border="0"><tr><td>
+<a href="/kegg/kegg2.html"><img align="middle" alt="KEGG" border="0" src="/Fig/bget/kegg3.gif"></a>
+&nbsp;&nbsp;&nbsp;<font class="title3"><b>Methane metabolism - Aquifex aeolicus</b></font></td>
+<td valign="bottom" align="right"><a target="_blank" href="/kegg/document/help_pathway.html">
+<img name="help" src="/Fig/bget/button_Hb.gif" border="0" align="middle" alt="Help" onmouseout="btn(this,'Hb')" onmousedown="btn(this,'Hbd')" onmouseover="btn(this,'Hbh')" onmouseup="btn(this,'Hb')"></a>
+</td></tr></table>
+[
+<a href="http://www.genome.jp/dbget-bin/get_linkdb?pathway+map00680">LinkDB search</a>
+|
+<a href="/kegg/ortholog/tab00680.html">Ortholog table</a>
+| <a href="/kegg/pathway.html">Pathway menu</a> ]
+<br>
+<select name="org_name">
+<!--#exec cmd="/opt/local/WWW/cgi/kegg/bin/put_org_options 00680 aae" -->
+</select>
+
+<input type="submit" value="Go">
+<!--#exec cmd="/opt/local/WWW/cgi/kegg/bin/put_pathway_objects btn_deforg 00680" -->
+<input type="hidden" name="mapno" value="00680">
+<br>
+<img src="/kegg/pathway/aae/aae00680.gif" usemap="#mapdata" border=0>
+<map name="mapdata">
+
+<area shape=rect	coords=535,56,723,83	href="/dbget-bin/get_linkdb?pathway+aae00680"	onMouseOver="note('pathway: aae00680')"	onMouseOut="clr()">
+<area shape=rect	coords=683,492,793,518	href="/kegg/pathway/aae/aae00920.html"	onMouseOver="note('aae00920.html')"	onMouseOut="clr()">
+<area shape=rect	coords=582,432,692,458	href="/kegg/pathway/aae/aae00260.html"	onMouseOver="note('aae00260.html')"	onMouseOut="clr()">
+<area shape=rect	coords=715,341,760,358	href="/dbget-bin/www_bget?aae+aq_479"	onMouseOver="note('aae: aq_479(glyA)')"	onMouseOut="clr()">
+<area shape=rect	coords=438,495,558,521	href="/kegg/pathway/aae/aae00910.html"	onMouseOver="note('aae00910.html')"	onMouseOut="clr()">
+<area shape=rect	coords=306,513,351,530	href="/dbget-bin/www_bget?aae+aq_660+aq_662+aq_802+aq_804+aq_960+aq_965"	onMouseOver="note('aae: aq_660(mbhS1) aq_662(mbhL1) aq_802(mbhS3) aq_804(mbhL3) aq_960(mbhL2) aq_965(mbhS2)')"	onMouseOut="clr()">
+<area shape=rect	coords=362,469,408,486	href="/dbget-bin/www_bget?aae+aq_1039+aq_1046+aq_1049"	onMouseOver="note('aae: aq_1039(fdoG) aq_1046(fdoH) aq_1049(fdoI)')"	onMouseOut="clr()">
+<area shape=rect	coords=76,51,229,78	href="/kegg/pathway/aae/aae00030.html"	onMouseOver="note('aae00030.html')"	onMouseOut="clr()">
+<area shape=rect	coords=546,297,591,314	href="/dbget-bin/www_bget?aae+aq_1429"	onMouseOver="note('aae: aq_1429(metF)')"	onMouseOut="clr()">
+<area shape=circle	coords=321,66,4	href="/dbget-bin/www_bget?compound+C00199"	onMouseOver="note('compound: C00199')"	onMouseOut="clr()">
+<area shape=circle	coords=409,68,4	href="/dbget-bin/www_bget?compound+C01438"	onMouseOver="note('compound: C01438')"	onMouseOut="clr()">
+<area shape=circle	coords=409,141,4	href="/dbget-bin/www_bget?compound+C00132"	onMouseOver="note('compound: C00132')"	onMouseOut="clr()">
+<area shape=circle	coords=178,141,4	href="/dbget-bin/www_bget?compound+C00085"	onMouseOver="note('compound: C00085')"	onMouseOut="clr()">
+<area shape=circle	coords=249,141,4	href="/dbget-bin/www_bget?compound+C06019"	onMouseOver="note('compound: C06019')"	onMouseOut="clr()">
+<area shape=circle	coords=84,259,4	href="/dbget-bin/www_bget?compound+C01046"	onMouseOver="note('compound: C01046')"	onMouseOut="clr()">
+<area shape=circle	coords=187,259,4	href="/dbget-bin/www_bget?compound+C00218"	onMouseOver="note('compound: C00218')"	onMouseOut="clr()">
+<area shape=circle	coords=409,262,4	href="/dbget-bin/www_bget?compound+C00067"	onMouseOver="note('compound: C00067')"	onMouseOut="clr()">
+<area shape=circle	coords=736,259,4	href="/dbget-bin/www_bget?compound+C00143"	onMouseOver="note('compound: C00143')"	onMouseOut="clr()">
+<area shape=circle	coords=701,326,4	href="/dbget-bin/www_bget?compound+C00037"	onMouseOver="note('compound: C00037')"	onMouseOut="clr()">
+<area shape=circle	coords=737,444,4	href="/dbget-bin/www_bget?compound+C00065"	onMouseOver="note('compound: C00065')"	onMouseOut="clr()">
+<area shape=circle	coords=485,350,4	href="/dbget-bin/www_bget?compound+C01031"	onMouseOver="note('compound: C01031')"	onMouseOut="clr()">
+<area shape=circle	coords=408,437,4	href="/dbget-bin/www_bget?compound+C00058"	onMouseOver="note('compound: C00058')"	onMouseOut="clr()">
+<area shape=circle	coords=410,543,4	href="/dbget-bin/www_bget?compound+C00011"	onMouseOver="note('compound: C00011')"	onMouseOut="clr()">
+<area shape=circle	coords=375,511,4	href="/dbget-bin/www_bget?compound+C00080"	onMouseOver="note('compound: C00080')"	onMouseOut="clr()">
+<area shape=circle	coords=276,511,4	href="/dbget-bin/www_bget?compound+C00282"	onMouseOver="note('compound: C00282')"	onMouseOut="clr()">
+<area shape=circle	coords=310,434,4	href="/dbget-bin/www_bget?compound+C01104"	onMouseOver="note('compound: C01104')"	onMouseOut="clr()">
+<area shape=circle	coords=188,433,4	href="/dbget-bin/www_bget?compound+C00565"	onMouseOver="note('compound: C00565')"	onMouseOut="clr()">
+<area shape=circle	coords=187,355,4	href="/dbget-bin/www_bget?compound+C00543"	onMouseOver="note('compound: C00543')"	onMouseOut="clr()">
+<area shape=circle	coords=570,351,4	href="/dbget-bin/www_bget?compound+C00440"	onMouseOver="note('compound: C00440')"	onMouseOut="clr()">
+<area shape=circle	coords=685,543,4	href="/dbget-bin/www_bget?compound+C00024"	onMouseOver="note('compound: C00024')"	onMouseOut="clr()">
+<area shape=circle	coords=685,567,4	href="/dbget-bin/www_bget?compound+C06021"	onMouseOver="note('compound: C06021')"	onMouseOut="clr()">
+<area shape=circle	coords=570,407,4	href="/dbget-bin/www_bget?compound+C06020"	onMouseOver="note('compound: C06020')"	onMouseOut="clr()">
+<area shape=circle	coords=143,175,4	href="/dbget-bin/www_bget?compound+C00118"	onMouseOver="note('compound: C00118')"	onMouseOut="clr()">
+<area shape=circle	coords=114,202,4	href="/dbget-bin/www_bget?compound+C00184"	onMouseOver="note('compound: C00184')"	onMouseOut="clr()">
+<area shape=circle	coords=273,175,4	href="/dbget-bin/www_bget?compound+C00231"	onMouseOver="note('compound: C00231')"	onMouseOut="clr()">
+
+</map>
+
+</form>
+</body>
+<!---
+///
+--->
+</html>
+

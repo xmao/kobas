@@ -1,0 +1,33 @@
+#compiler-settings
+useAutocalling=no
+#end compiler-settings
+
+<h1>The frequent pathways among your data set</h1>
+
+<table class="kobasSummary">
+  <tr>
+  #for $field in $title[0:2] + $title[3:4]
+  <td>$field</td>
+  #end for
+  </tr>
+  
+  #for $row in $result
+  #set $pathway = $row[0]
+  #set $geneAmount = $row[1]
+  #set $pathwayID = $row[2]
+  #set $geneIDs = $row[3]
+  #set $koIDs = $row[4]
+  <tr>
+    <!-- If pathway_id exist, print the link to kegg -->
+    #if $pathwayID != "" and $pathwayID != "ko00000"
+    <td><a target="_blank" href="http://www.genome.jp/dbget-bin/show_pathway?$pathwayID+$koIDs">$pathway</a>
+    #else
+    <td>$row[0]</td>
+    #end if
+    
+    #for $field in ($geneAmount, $geneIDs)
+    <td>$field</td>
+    #end for
+  </tr>
+  #end for
+</table>

@@ -1,0 +1,390 @@
+================
+ KOBAS Tutorial
+================
+
+KEGG-Orthology Based annotation System (KOBAS), is a suite of Python scripts,
+which can automatically annotate a set of sequences with KO terms and identify
+both the most frequent and the statistically significantly enriched pathways.
+
+This tutorial doesn't attempt to be comprehensive and cover all the details,
+even algorithmic details. Instead, it gives you a whole view of KOBAS system and
+then focuses on how to use KOBAS efficiently in practical analysis.  If you are
+interested in the involved algorithm, please refer to KOBAS paper.
+
+An overview of KOBAS
+====================
+
+What's KOBAS
+------------
+
+KOBAS, KEGG Ortholgy Based Annotation System, a suite of layered Python scripts,
+which can automatically annotate a set of sequences with KO terms and identify
+both the most frequent and the statistically significantly enriched pathways.
+
+Features:
+
+* Anntate DNA or protein sequences with KO terms over Blasting or ID mapping
+  method
+* Identify the most frequent pathways and enriched pathways over multiple
+  statistical methods
+* Support simple tabular-like flat text output and HTML output
+* Provide almost complete parsers for all KEGG resource
+* Provide flexible configuration methods
+* Layed infrastructure for reuse and easy automation
+* SQLite support, zero database configuration
+
+Design philosophy
+-----------------
+
+Some philosophies are followed when designing KOBAS:
+
+Loopse coupling
+~~~~~~~~~~~~~~~
+
+KOBAS is designed as a multi-layered application: python modules, python scripts
+and shell scripts.  Python modules in ``src/kobas/`` directory can enable
+maximal reuse of core codes, which provides almost complete parsers for all
+suites of KEGG resources and core codes about sequences annotation and pathway
+mining.  Upon these core modules, several functional python scripts are created
+in ``scripts`` directory, which serve as actual annotation, pathway mining and
+usual operations on the fasta file and annotation file.  Each script can be
+adjusted by KOBAS configuration file or commoand line options. Further, to
+facilitate job automation, some shell scritpt demos are also found for the
+wrappers for python scripts in ``scripts`` directory.
+
+Assure right by unit test
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Quality control is critical, and KOBAS assure this by popular unit test.  In KOBAS,
+each core python module has one corresponding unit test module in
+``src/kobas/tests`` directory, so any broken is easy to detect.
+
+Flexible configurations
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The behaviors of actual scripts is adjusted flexibly on different levels for
+kinds of sakes.  KOBAS configuration files are for relatively persistent settings:
+``/etc/kobasrc} for global settings, while \file{.kobasrc`` in HOME directory for
+persional setting, which will overide global settings. Command options are
+available for each script for transient behavior adjustment, which have priority
+over all configuration files.
+
+KOBAS's architecture
+--------------------
+
+.. image:: kobas.png
+
+Install KOBAS
+=============
+
+Please refer to install.txt.
+
+
+Get started with KOBAS
+======================
+
+The basic workflow to use KOBAS involves two steps: annotate sequences with KO,
+and then identify enriched pathways.  Each step is implemented as one separate
+script: ``blast2ko.py`` and ``pathfind.py.py``.  This chapter will demonstrate how
+to use them in detail.
+
+Annotating with blast2ko.py
+---------------------------
+
+``blast2ko.py`` serves to annotate a set of DNA or protein sequences with KO
+terms, which plays the most important role in KOBAS.  The typical usage is::
+
+  blast2ko.py FILE
+
+In this case, ``FILE`` is a flat file consist of FASTA protein sequences::
+
+  >YAL068C_s.cerevisiae
+  MVKLTSIAAGVAAIAATASATTTLAQSDERVNLVELGVYVSDIRAHLAQYYMFQAAHPTE
+  TYPVEVAEAVFNYGDFTTMLTGIAPDQVTRMITGVPWYSSRLKPAISSALSKDGIYTIAN
+  >YAL067W-A_s.cerevisiae
+  MPIIGVPRCLIKPFSVPVTFPFSVKKNIRILDLDPRTEAYCLSLNSVCFKRLPRRKYFHL
+  LNSYNIKRVLGVVYC
+  >YAL067C_s.cerevisiae
+  MYSIVKEIIVDPYKRLKWGFIPVKRQVEDLPDDLNSTEIVTISNSIQSHETAENFITTTS
+  EKDQLHFETSSYSEHKDNVNVTRSYEYRDEADRPWWRFFDEQEYRINEKERSHNKWYSWF
+  KQGTSFKEKKLLIKLDVLLAFYSCIAYWVKYLDTVNINNAYVSGMKEDLGFQGNDLVHTQ
+  VMYTVGNIIFQLPFLIYLNKLPLNYVLPSLDLCWSLLTVGAAYVNSVPHLKAIRFFIGAF
+  EAPSYLAYQYLFGSFYKHDEMVRRSAFYYLGQYIGILSAGGIQSAVYSSLNGVNGLEGWR
+  WNFIIDAIVSVVVGLIGFYSLPGDPYNCYSIFLTDDEIRLARKRLKENQTGKSDFETKVF
+  DIKLWKTIFSDWKIYILTLWNIFCWNDSNVSSGAYLLWLKSLKRYSIPKLNQLSMITPGL
+  GMVYLMLTGIIADKLHSRWFAIIFTQVFNIIGNSILAAWDVAEGAKWFAFMLQCFGWAMA
+  PVLYSWQNDICRRDAQTRAITLVTMNIMAQSSTAWISVLVWKTEEAPRYLKGFTFTACSA
+  FCLSIWTFVVLYFYKRDERNNAKKNGIVLYNSKHGVEKPTSKDVETLSVSDEK
+  ...
+
+If the sequences are DNA sequences, you just need tell ``blast2ko.py`` with the
+option ``-p blastx``, so blast2ko.py will invoke ``blastx`` to dynamically
+translate DNA sequence into protein before annotating::
+
+  blast2ko.py -p blastx FILE
+
+Once the sequences are submitted to ``blast2ko.py``, ``blast2ko.py`` will generally
+run into annotating for a long while and then prints the final annotation result
+to the stand console.  Users can easily save the result into another file by
+output redirection or pass it to other filter over Unix pipe to process further.
+
+The final annotation result is flat tab-separated text, which is very simple as
+follows::
+
+  # Now is preparing for BLAST, please wait ...
+  # Done!
+  # Now is blasting and annotating, please wait...
+  # Condition:    evalue=1e-5 rank=5
+  # Summary:      1965 succeed, 3890 fail
+  
+  # query ko_id:rank:evalue:score:identity
+  YAL068C_s.cerevisiae
+  YAL067W-A_s.cerevisiae
+  YAL067C_s.cerevisiae    K02511:58:5e-11:70.5:0.209486166008
+  ...
+
+The first lines prefixed with `#` are comments, such as, run-time parameters, a
+result summary and meta information of annotation entry.  Then, followed by
+sequence annotations.  Each entry occupies one line, and the first column is
+sequence ID, and the following things separated with TAB are KO annotations if
+it succeeds, or blank.  If one sequence are annotated with multiple KO terms,
+and all KO annotations are listed one by one separated with SPACE.  Each KO
+annotation entry consists of five fields separated with colon, which are KO ID,
+rank, evalue, score, identity.
+  
+By the way, you can easily refer to on-line help with the command::
+
+  blast2ko.py
+
+Mining with pathfind.py
+-----------------------
+
+Once we get KO annotations for queried sequences, we can identify the most
+frequent pathways or statistically enriched pathways with ``pathfind.py``.  Assume
+that the annotation result file is ``annot.txt``, and its typical usage is
+straightforward.  Just with only ``annot.txt`` followed::
+
+  pathfind.py annot.txt
+
+you can get the most frequent pathways represented as flat tabular text::
+
+  #Pathway        Count
+  Ribosome        169
+  Purine metabolism       104
+  Glycolysis / Gluconeogenesis    61
+  Cell cycle      60
+  Oxidative phosphorylation       57
+  Translation factors     54
+  Starch and sucrose metabolism   52
+  Glycine, serine and threoninemetabolism 46
+  Pyrimidine metabolism   45
+  Pyruvate metabolism     42
+  ...
+
+Similarly, the first line is the comment line, which indicates the content in
+the file, and then the identified pathways are listed row by row in descending
+order.  Each pathway contains two fields, its name and gene number it contains,
+which are separated with TAB.  Notably, the pathway name here just corresponds
+to the third level of KO hierarchy.
+
+Further, ``pathfind.py`` can accept two annotation files and identify statistically
+enriched pathways.  Three statistical methods are available currently:
+hypergeometric test, bionomal test, chi square method, which specified
+respectively by the option of ``-k h/b/c``.  For hypergeometric test, the first
+file must be a subset of the second file, while there is no limit for the last
+two statistical methods. The typical usage with hypergeometric test is::
+
+  pathfind.py -k h FILE1 FILE2
+
+The output of enriched pathways is also flat tabluar text::
+
+  #Pathway        Sample Count    Backgroud Count Pvalue  Qvalue
+  Phenylalanine, tyrosine andtryptophan biosynthesis      27      30      0.00362190718822        0.00920823861413
+  Reductive carboxylate cycle (CO2fixation)       15      16      0.0147135042733 0.0367837606832
+  Tyrosine metabolism     22      26      0.0387091655459 0.095186472654
+  High-mannose typeN-glycan biosynthesis  15      17      0.0471418488409 0.114052860099
+  Selenoamino acidmetabolism      20      24      0.0638232139694 0.15196003326
+  ...
+
+The first line is also the comment line, and the following lines are enriched
+pathways sorted by ``Pvalue``.  Each pathway occupies one line, and it includes
+five fields, the pathway name, the number of genes mapped to this pathway in the
+first data set, the number of genes in the second data set, Pvalue cacluated by
+the specified statistical method and Qvalue (False Discovery Rate) value.
+
+By the way, kobas has precomputed the gene distributions for all the genomes
+available in the KEGG GENES database.  In KOBAS they are represented as
+three-letter abbreviation, and please refer to related web page
+(http://www.genome.jp/kegg/catalog/org_list.html) for the detail. To access such
+precomputed genomes in ``pathfind.py``, you need just specify three-letter
+abbreviation as like a file name.  For example, assume that we want to compare
+``Synechocystis sp. PCC6803`` and ``Saccharomyces cerevisiae``, which are
+abbreviated as ``syn`` and ``sce``, we can identify the enriched pathways over
+chi square test by the following command::
+
+  pathfind.py -k c syn sce
+
+Use KOBAS more efficiently
+==========================
+
+The core scripts described in the last chapter only provides pretty basic
+functions, and it's not by far enough in practical cases.  So it's critical to
+tune and extend KOBAS, and this chapter will focus on how to make good and
+efficient use of KOBAS.
+
+Customizing KOBAS
+-----------------
+
+KOBAS depends many environment variables, which are initially defined with
+configuration file, and its format is very simple, which can be parsed by python
+standard module, ConfigParser.  Global setting file, ``/etc/kobasrc``, is as
+follows::
+
+  [DEFAULT]
+  kobas_home = /usr/share/kobas
+  blast_home = /usr/bin
+  
+  [KEGG]
+  kobasdb = %(kobas_home)s/kegg.dat
+  
+  [BLAST]
+  blast = %(blast_home)s/blastall
+  blastdb = %(kobas_home)s/keggseq.fasta
+  
+  [PARAMETER]
+  evalue = 1.0e-5
+  rank = 5
+
+The configuration file consists of sections, led by a `[section]` header and
+followed by `name = value` entries.  Note that leading whitespace is removed
+from values.  The optional values can contain format strings which refer to
+other values in the same section, or values in a special `DEFAULT` section.
+Lines beginning with `#` are ignored and may be used to provide comments.
+
+``/etc/kobasrc`` defines three sections, which totally contains meta variables
+(kobas_home and blast_home) six variables (kobasdb, keggdict, blast, blastdb, evalue
+and rank).  As the name indicates, respective meanings are straightforward:
+
+kobas_home
+  Top directory which contains KOBAS backend data
+blast_home
+  Top directory which contains blastall binary program, which is
+  generally ``/usr/bin``, that is its absolute path is
+  ``/usr/bin/blastall``.
+kobasdb
+  The path of KOBAS backend SQLite 3 database file, which is relative
+  to ``kobas_home``.
+blast
+  The path of blastall, which is relative to ``blast_home``.
+blastdb
+  The path of backend sequence database used by blastall, which is
+  relative to ``kobas_home``.
+evalue
+  Default evalue cutoff, which is represented with scientific
+  counting method.
+rank
+   Default rank cutoff.
+
+When you undertand this configuration file, you can even run KOBAS without
+installation, just with simple settingsg.  The secret is that KOBAS scripts
+depends upon python module, backend data and KOBAS configuration file, so it
+involes only three steps to make KOBAS work.  Assume KOBAS distribution tarball
+is in your HOME directory, type the following commands with the root account::
+
+  tar zxf kobas-1.1.0.tar.gz && cd kobas-1.1.0
+  ln -snf `pwd`/src/kobas/ /usr/lib/python$(python -c 'import sys; print sys.version[:3]')/site-packages/
+  sed -e "/^kobas_home/ckobas_home = `pwd`" data/kobasrc > /etc/kobasrc
+
+The last step actually copies ``kobasrc} into \file{/etc/`` directory and
+updates ``kobas_home`` variable with the top directory of the kobas
+distribution. Now you can run any python scripts, e.g. ``blast2ko.py``::
+
+  python `pwd`/scripts/blast2ko.py
+
+or shell script::
+
+  sh `pwd`/shell/blast2ko.sh
+
+Once annotating, more reuse
+---------------------------
+
+It's pretty usual to extract some snippets of annotations as another sample from
+a large annotation file, which may meet stricter conditions or come from a
+smaller sequence set.  KOBAS provides one python script, ``annotkit.py``, to aid
+users to manipulate annotation files.  ``annotkit.py`` accepts the following
+options:
+
+  -e EVALUE	Evalue cutoff ($<EVALUE$)
+  -i IDENTITY	IDENTIFY cutoff ($>=IDENTITY$)
+  -o FORMAT	Output format, o indicates raw annotation format and t
+                indicates detailed tab-seperated format, which related contains pathway
+		information, gene function and all parameters.
+  -r RANK	Rank cutoff ($<=RANK$)
+  -s FILE	One-column file of sequence subset, one ID in each line.
+  -s FILE	Two-column file of Sequence ID map seperated with tab, default
+                order is key, value.
+
+A practical usage is to annotate all sequences only once under the most loose
+cutoffs of evalue and rank, and contruct all specific annotation set with
+``annotkit.py``.  The default cutoffs of evalue and rank can be set respectively
+as 1000 and 1000 in ``\$HOME/.kobasrc``.
+
+Assume that the raw annotation file is ``annot_raw.txt`` and sample sequence
+ID file is ``set1_ids.txt``, and regular sample annotation set and
+background set can be constucted under evalue $10^{-5}$ and rank $5$ as
+follows::
+
+  annotkit.py -e 1e-5 -r 5 -o o -s set1_ids.txt annot_raw.txt > set1_annot.txt
+  annotkit.py -e 1e-5 -r 5 -o o annot_raw.txt > annot_all.txt
+
+Further, you can get detailed annotation information for each sequences by this
+command::
+
+  annotkit.py -e 1e-5 -r 5 -o t -s set1_ids.txt annot_raw.txt > set1_detailed.txt
+
+Job automation
+--------------
+
+Nobody likes repeated jobs, so do I. I usually want all analysis once, not by
+manually input commands many times.  This automation is easy to get by a simple
+shell script based on the method of once annotating (See \ref{sec:reuse})::
+
+  for dataset_file in $*; do
+      dataset=${dataset_file%%_*}
+      annotkit.py -o o -s ${dataset_file} annot_all.txt > "${dataset}_annot.txt"
+      annotkit.py -o t -s ${dataset_file} annot_all.txt > "${dataset}_detailed.txt"
+      pathfind.py "${dataset}_annot.txt" > "${dataset}_freq.txt" 
+      pathfind.py -k h "${dataset}_annot.txt" annot_all.txt > "${dataset}_hyper.txt"
+      pathfind.py -k b "${dataset}_annot.txt" annot_all.txt > "${dataset}_binom.txt"
+      pathfind.py -k c "${dataset}_annot.txt" annot_all.txt > "${dataset}_chisq.txt"
+  done
+
+This script depends upon some prerequisites:
+
+* ``annot_all.txt`` is the global annotation file including all sequences
+  under specified evalue and rank cutoff; if no, please generate it beforhand.
+* All dataset file follow same naming convention, xxx_ids.txt, and xxx
+  indicates dataset name.
+* In this case, ``annot_all`` is considered as background annotation file.
+
+This simple script will automatically generate six analysis file for each
+dataset, and user can also easily refines it to support more complex automation.
+Use your prefered editor, paste the snippet and save it with the name as you
+like, maybe kobas_batch.sh.  Now assume that there are three files in current
+directory, ``annot_all.txt``, ``set1_ids.txt``, ``set2_ids.txt``, you
+can get all the analysis results by the command, totaly 12 output files::
+
+  sh kobas_batch.sh *_ids.txt
+
+Improving KOBAS's performance
+-----------------------------
+
+Annotating in KOBAS is pretty time-consuming, so it's very criticial to improve
+kobas's performance.  Currently, there is no automatic way to optimize KOBAS yet,
+but we can still tune it manually at least by two ways::
+
+  * Split the large sequence file into several small sequence files, and join
+    all the annotations together after annotating.
+  * Once annotating, and reuse it as much as possible.
+
+

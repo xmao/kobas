@@ -1,0 +1,4 @@
+R00019	Reduced ferredoxin:H+ oxidoreductase; 2 Reduced ferredoxin + 2 H+ <=> Hydrogen + 2 Oxidized ferredoxin
+R00519	Formate:NAD+ oxidoreductase; Formate + NAD+ <=> H+ + CO2 + NADH
+R01222	5-Methyltetrahyfrofolate:(acceptor) oxidoreductase; 5,10-Methylenetetrahydrofolate + FADH2 <=> 5-Methyltetrahydrofolate + FAD
+R00945	5,10-Methylenetetrahydrofolate:glycine hydroxymethyltransferase; 5,10-Methylenetetrahydrofolate + Glycine + H2O <=> Tetrahydrofolate + L-Serine

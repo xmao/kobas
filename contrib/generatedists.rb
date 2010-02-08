@@ -37,8 +37,6 @@ kos.each do |ko|
   end
 end
 
-puts orgs
-
 orgs.each do |org,pathways|
   file = File.new(org, 'w')
   pathways.each do |pathway,genes|

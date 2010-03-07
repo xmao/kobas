@@ -15,10 +15,8 @@ Please install these softwares as follows beforehand:
 * `NCBI BLAST Standlone Edition`_
 * Cheetah_
 * R_ (>= 2.0), QValue_ and RPy_
-* Graphviz_
 
 .. _Python: http://www.python.org
-.. _SQLAlchemy: http://www.sqlalchemy.org
 .. _SQLite: http://www.sqlite.org
 .. _PySQLite: http://pysqlite.org
 .. _BioPython: http://biopython.org
@@ -27,7 +25,6 @@ Please install these softwares as follows beforehand:
 .. _R: http://www.r-project.org
 .. _QValue: http://faculty.washington.edu/jstorey/qvalue/
 .. _RPy: http://rpy.sourceforge.net
-.. _Graphviz: http://www.graphviz.org
 
 
 Note: R package install method (QValue)
@@ -44,16 +41,16 @@ Make sure that the above packages have been installed and that your Python
 distribution contains distutils modules.
 
 * Download the KOBAS package from `KOBAS download`_ website
-* ``tar zxf kobas-1.1.0.tar.gz``
-* ``cd kobas-1.1.0``
+* ``tar zxf kobas-1.2.0.tar.gz``
+* ``cd kobas-1.2.0``
 * ``python setup.py install``
 
 Initialize KOBAS
 ----------------
 
 * Download the KOBAS data package from `KOBAS download`_ website
-* ``tar zxf kobas-data-1.1.0.tar.gz``
-* ``cd kobas-data-1.1.0``
+* ``tar zxf kobas-data-1.2.0.tar.gz``
+* ``cd kobas-data-1.2.0``
 * ``kobasinit.py``
 
 Test KOBAS
@@ -61,7 +58,7 @@ Test KOBAS
 
 If you want to make sure whether KOBAS work as wanted,
 
-* ``cd kobas-1.1.0``
+* ``cd kobas-1.2.0``
 * ``./test.py``
 
 If no error message comes, the installation of KOBAS is OK.

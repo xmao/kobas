@@ -94,5 +94,5 @@ if __name__ == "__main__":
 
     verify_kobas_data(src)
     init_static(join(src,'static'), dst)
-    init_sqlite(join(src, 'db', 'ko-dump.sql'), join(dst, 'kegg.dat'))
+    init_sqlite(join(src, 'db', 'kegg-dump.sql'), join(dst, 'kegg.dat'))
     init_fasta(join(src, 'fasta', 'keggseq.fasta'), dst)
